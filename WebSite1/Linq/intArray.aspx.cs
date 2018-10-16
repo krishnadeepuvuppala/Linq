@@ -16,13 +16,14 @@ public partial class Linq_intArray : System.Web.UI.Page
     {
         int[] marks = { 33, 99, 44, 45, 87, 65, 77 };
         IEnumerable<int> passMarks = from m in marks where m > 50 select m;
+        IEnumerable<int> failed = marks.Where(m => m < 50);
         string sResult = "<br>";
         foreach (int mark in passMarks)
         {
             sResult += mark + ", "; 
         }
         sResult += "<br>";
-        foreach (int mark in passMarks)
+        foreach (int mark in failed)
         {
             sResult += mark + ", ";
         }
