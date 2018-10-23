@@ -37,6 +37,15 @@ public partial class Linq_Grouping : System.Web.UI.Page
         new Student() { StudentID = 5, StudentName = "Rick" , Age = 15 }
         };
         var groupByAge = from student in studentList group student by student.Age;
+
+        //tolookup
+
+        var lookup = studentList.ToLookup(s => s.Age);
+
+        var avg = studentList.Average(s => s.Age);
+
+        var totalAge = (from s in studentList
+                        select s.Age).Count();
         lblResult.Text = "<br>";
         foreach (var v in groupByAge)
         {
@@ -47,5 +56,18 @@ public partial class Linq_Grouping : System.Web.UI.Page
             lblResult.Text += "<br><br>";
 
         }
+
+        lblResult.Text += "<br><br>";
+        foreach (var v in lookup)
+        {
+            lblResult.Text += "Students with Age: "+v.Key;
+            lblResult.Text += "<br>";
+            foreach (Student s in v)
+                lblResult.Text += s.StudentName + "<br>";
+            lblResult.Text += "<br><br>";
+
+        }
+        lblResult.Text += avg+"-"+ totalAge;
+
     }
 }
